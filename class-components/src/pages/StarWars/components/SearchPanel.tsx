@@ -1,9 +1,9 @@
-import { Component } from 'react';
-import Input from '../../../UI/Input.tsx';
-import Button from '../../../UI/Button.tsx';
+import React from 'react';
+import Input from '../../../UI/Input';
+import Button from '../../../UI/Button';
 import './SearchPanel.css';
 
-class SearchPanel extends Component<{
+class SearchPanel extends React.Component<{
   modelSearch: (search: string) => void;
   searchValue: string;
   acceptFilter: () => void;

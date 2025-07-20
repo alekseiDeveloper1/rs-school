@@ -1,6 +1,6 @@
-import { Component } from 'react';
+import React from 'react';
 
-class Input extends Component<{
+class Input extends React.Component<{
   modelSearch: (search: string) => void;
   searchValue: string;
 }> {
@@ -10,6 +10,7 @@ class Input extends Component<{
         className={'mr-10'}
         onChange={(event) => this.props.modelSearch(event.currentTarget.value)}
         value={this.props.searchValue}
+        placeholder="Search..."
       />
     );
   }

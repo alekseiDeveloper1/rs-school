@@ -1,8 +1,8 @@
-import { Component } from 'react';
-import { Api } from '../../api/api.ts';
-import List from './components/List.tsx';
-import { lsService, type Season } from '../../scripts/scripts.ts';
-import SearchPanel from './components/SearchPanel.tsx';
+import React from 'react';
+import { Api } from '../../api/api';
+import List from './components/List';
+import { lsService, type Season } from '../../scripts/scripts';
+import SearchPanel from './components/SearchPanel';
 type State = {
   seasons: Season[] | null;
   isLoading: boolean;
@@ -10,7 +10,7 @@ type State = {
   search: string;
   filtered: Season[] | null;
 };
-class Page extends Component {
+class Page extends React.Component {
   state: State = {
     seasons: null,
     isLoading: true,

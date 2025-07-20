@@ -1,6 +1,6 @@
-import { Component } from 'react';
+import React from 'react';
 
-class Button extends Component<{ acceptFilter: () => void }> {
+class Button extends React.Component<{ acceptFilter: () => void }> {
   render() {
     return <button onClick={this.props.acceptFilter}>Search</button>;
   }

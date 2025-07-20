@@ -1,7 +1,7 @@
-import { Component } from 'react';
+import React from 'react';
 import type { Season } from '../../../scripts/scripts.ts';
 
-class List extends Component<{
+class List extends React.Component<{
   items: Season[] | null;
   isLoading: boolean;
   error: string | null;
