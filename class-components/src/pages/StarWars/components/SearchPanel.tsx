@@ -1,24 +1,18 @@
-import React from 'react';
 import Input from '../../../UI/Input';
 import Button from '../../../UI/Button';
 import './SearchPanel.css';
 
-class SearchPanel extends React.Component<{
+function SearchPanel(props: {
   modelSearch: (search: string) => void;
   searchValue: string;
   acceptFilter: () => void;
-}> {
-  render() {
-    return (
-      <div className="flex">
-        <Input
-          modelSearch={this.props.modelSearch}
-          searchValue={this.props.searchValue}
-        />
-        <Button acceptFilter={this.props.acceptFilter} />
-      </div>
-    );
-  }
+}) {
+  return (
+    <div className="flex">
+      <Input modelSearch={props.modelSearch} searchValue={props.searchValue} />
+      <Button acceptFilter={props.acceptFilter} />
+    </div>
+  );
 }
 
 export default SearchPanel;

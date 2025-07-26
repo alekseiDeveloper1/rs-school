@@ -8,11 +8,3 @@ export type Season = {
   title: string;
   uid: string;
 };
-export class lsService {
-  setLS = (key: string, value: string) => {
-    localStorage.setItem(key, value);
-  };
-  getLS = (key: string) => {
-    return localStorage.getItem(key);
-  };
-}

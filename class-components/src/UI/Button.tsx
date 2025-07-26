@@ -1,9 +1,5 @@
-import React from 'react';
-
-class Button extends React.Component<{ acceptFilter: () => void }> {
-  render() {
-    return <button onClick={this.props.acceptFilter}>Search</button>;
-  }
+function Button(props: { acceptFilter: () => void }) {
+  return <button onClick={props.acceptFilter}>Search</button>;
 }
 
 export default Button;
