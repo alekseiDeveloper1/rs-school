@@ -5,19 +5,20 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2022",
+    "lib": ["dom", "es2022"],
     "module": "commonjs",
     "jsx": "react-jsx",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["jest", "@testing-library/jest-dom"],
+    "types": ["jest", "@testing-library/jest-dom", "node"],
     "allowImportingTsExtensions": true,
     "baseUrl": "./src",
     "paths": {
       "@api/*": ["api/*"],
-      "@components/*": ["pages/*/components/*"]
+      "@components/*": ["src/components/*"]
     }
   },
   "include": ["src/**/*", "src/**/*.tsx", "src/**/*.d.ts"],

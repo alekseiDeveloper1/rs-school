@@ -8,6 +8,7 @@ import {
 import SearchPanel from './pages/StarWars/components/SearchPanel.tsx';
 import Page from './pages/StarWars/Page.tsx';
 import { Api } from './api/api.ts';
+import { MemoryRouter } from 'react-router-dom';
 const mockLocalStorage = (() => {
   let store: Record<string, string> = {};
 
@@ -73,7 +74,11 @@ describe('User Input Handling', () => {
   });
   it('updates input value when typing', async () => {
     await act(async () => {
-      render(<Page />);
+      render(
+        <MemoryRouter initialEntries={['/']}>
+          <Page />
+        </MemoryRouter>
+      );
     });
     const input = screen.getByRole('textbox') as HTMLInputElement;
     fireEvent.change(input, { target: { value: 'TypeScript' } });
@@ -83,17 +88,20 @@ describe('User Input Handling', () => {
 describe('Search Functionality', () => {
   it('loads recent searches', async () => {
     const mockApiInstance = {
-      getList: jest
-        .fn()
-        .mockResolvedValue([
-          { uid: 1, title: 'Season 1', series: { title: '' } },
-        ]),
+      getList: jest.fn().mockResolvedValue({
+        seasons: [{ uid: 1, title: 'Season 1', series: { title: '' } }],
+        totalElements: 10,
+      }),
     };
 
     (Api as jest.Mock).mockImplementation(() => mockApiInstance);
 
     await act(async () => {
-      render(<Page />);
+      render(
+        <MemoryRouter initialEntries={['/']}>
+          <Page />
+        </MemoryRouter>
+      );
     });
 
     expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
@@ -106,7 +114,11 @@ describe('Search Functionality', () => {
 describe('localStorage Integration', () => {
   it('saves recent searches to localStorage', async () => {
     await act(async () => {
-      render(<Page />);
+      render(
+        <MemoryRouter initialEntries={['/']}>
+          <Page />
+        </MemoryRouter>
+      );
     });
     const input = screen.getByRole('textbox');
     fireEvent.change(input, { target: { value: 'redux' } });
