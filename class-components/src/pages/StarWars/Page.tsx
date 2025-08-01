@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Api } from '../../api/api';
 import List from './components/List';
-import { type Season } from '../../scripts/scripts';
+import { callApi, normalizeString, type Season } from '../../scripts/scripts';
 import SearchPanel from './components/SearchPanel';
 import useLocalStorage from '../../hooks/useLocalStorage.ts';
 import Header from '../../layout/Page';
@@ -29,27 +28,22 @@ export default function Page() {
     totalCount: 50,
   });
   const fetchSeasons = async () => {
-    try {
-      const api = new Api();
-      const res: { seasons: Season[]; totalElements: number } =
-        await api.getList(ITEMS_PER_PAGE, currentPage);
-      if (!res) {
-        throw new Error('Failed to fetch user');
-      }
-      const seasons = res.seasons;
-      const totalElements = res.totalElements;
-      setState({
-        ...state,
-        seasons,
-        isLoading: false,
-        filtered: seasons,
-        totalCount: totalElements,
-      });
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        setState({ ...state, isLoading: false, error: error });
-      }
+    const { seasonsRes, totalElements, error } = await callApi(
+      ITEMS_PER_PAGE,
+      currentPage
+    );
+    if (error instanceof Error) {
+      setState({ ...state, isLoading: false, error: error });
+      return;
     }
+
+    setState({
+      ...state,
+      seasons: seasonsRes,
+      isLoading: false,
+      filtered: seasonsRes,
+      totalCount: totalElements,
+    });
   };
   const [searchValue, setSearchValue] = useLocalStorage('search', '');
   useEffect(() => {
@@ -63,10 +57,6 @@ export default function Page() {
   const modelSearch = (searchDef: string) => {
     setState({ ...state, search: searchDef });
     setSearchValue(searchDef);
-  };
-
-  const normalizeString = (search: string) => {
-    return search.toLowerCase().trim();
   };
 
   const acceptFilter = () => {
