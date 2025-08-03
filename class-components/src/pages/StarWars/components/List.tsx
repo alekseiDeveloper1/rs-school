@@ -1,4 +1,5 @@
 import type { Season } from '../../../scripts/scripts.ts';
+import DashboardItem from './item.tsx';
 
 function List(props: {
   items: Season[] | null | undefined;
@@ -18,9 +19,9 @@ function List(props: {
   return (
     <ul>
       {props.items.map((item: Season, index: number) => (
-        <li key={index}>
-          {item.title} | {item.series.title}
-        </li>
+        <div key={index}>
+          <DashboardItem item={item} />
+        </div>
       ))}
     </ul>
   );
