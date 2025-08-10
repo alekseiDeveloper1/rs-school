@@ -1,12 +1,40 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { Season } from '../scripts/scripts.ts';
-
-export class Api {
-  getList = async (
-    countElement: number,
-    currentPage: number
-  ): Promise<{ seasons: Season[]; totalElements: number }> => {
-    const url = `https://stapi.co/api/v1/rest/season/search?pageSize=${countElement}&pageNumber=${currentPage}`;
-    const res = await fetch(url).then((res) => res.json());
-    return { seasons: res.seasons, totalElements: res.page.totalElements };
+interface ApiResponse {
+  seasons: Season[];
+  page: {
+    totalElements: number;
   };
 }
+
+interface TransformedResponse {
+  seasons: Season[];
+  totalElements: number;
+}
+export const api = createApi({
+  reducerPath: 'stapi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://stapi.co/api/v1/rest/' }),
+  endpoints: (builder) => ({
+    getSeasons: builder.query<
+      TransformedResponse,
+      {
+        countElement: number;
+        currentPage: number;
+      }
+    >({
+      query: ({ countElement, currentPage }) => ({
+        url: 'season/search',
+        params: {
+          pageSize: countElement,
+          pageNumber: currentPage,
+        },
+      }),
+      transformResponse: (response: ApiResponse): TransformedResponse => ({
+        seasons: response.seasons,
+        totalElements: response.page.totalElements,
+      }),
+    }),
+  }),
+});
+
+export const { useGetSeasonsQuery } = api;

@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import Page from './pages/StarWars/Page';
 import About from './pages/About/Page';
-import NotFoundPage from './pages/NotFound/Page';
+// import NotFoundPage from './pages/NotFound/Page';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './app/store.ts';
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Page />,
-    errorElement: <NotFoundPage />,
+    // errorElement: <NotFoundPage />,
   },
   {
     path: '/about',
