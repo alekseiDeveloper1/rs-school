@@ -1,4 +1,4 @@
-import type { Season } from '../../../scripts/scripts.ts';
+import type { Season } from '../../scripts/scripts.ts';
 import DashboardItem from './item.tsx';
 
 function List(props: {

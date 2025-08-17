@@ -1,5 +1,5 @@
-import { Link, useSearchParams } from 'react-router-dom';
-
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;
@@ -13,7 +13,7 @@ export function Pagination({
   currentPage,
   maxVisiblePages = 5,
 }: PaginationProps) {
-  const [searchParams] = useSearchParams();
+  const searchParams = useSearchParams();
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   if (totalPages <= 1) return null;
@@ -41,7 +41,7 @@ export function Pagination({
       <ul className="flex items-center gap-1">
         <li>
           <Link
-            to={getPageUrl(Math.max(1, currentPage - 1))}
+            href={getPageUrl(Math.max(1, currentPage - 1))}
             aria-disabled={currentPage === 1}
           >
             &lt;
@@ -52,7 +52,7 @@ export function Pagination({
           <>
             <li>
               <Link
-                to={getPageUrl(1)}
+                href={getPageUrl(1)}
                 className="px-3 py-1 hover:bg-gray-100 rounded"
               >
                 1
@@ -64,7 +64,7 @@ export function Pagination({
 
         {getVisiblePages().map((page) => (
           <li key={page}>
-            <Link to={getPageUrl(page)}>{page}</Link>
+            <Link href={getPageUrl(page)}>{page}</Link>
           </li>
         ))}
 
@@ -75,7 +75,7 @@ export function Pagination({
             )}
             <li>
               <Link
-                to={getPageUrl(totalPages)}
+                href={getPageUrl(totalPages)}
                 className="px-3 py-1 hover:bg-gray-100 rounded"
               >
                 {totalPages}
@@ -86,7 +86,7 @@ export function Pagination({
 
         <li>
           <Link
-            to={getPageUrl(Math.min(totalPages, currentPage + 1))}
+            href={getPageUrl(Math.min(totalPages, currentPage + 1))}
             aria-disabled={currentPage === totalPages}
           >
             &gt;

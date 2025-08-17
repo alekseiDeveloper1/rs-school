@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { selectedItemsReducer } from '../pages/StarWars/components/selectedItemsSlice.ts';
+import { selectedItemsReducer } from './StarWars/components/selectedItemsSlice.ts';
 import { api } from '../api/api.ts';
 
 export const store = configureStore({

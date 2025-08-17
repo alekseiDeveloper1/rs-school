@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { Season } from '../scripts/scripts.ts';
+import type { Season } from '../app/scripts/scripts.ts';
 interface ApiResponse {
   seasons: Season[];
   page: {

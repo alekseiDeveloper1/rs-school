@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, removeItem } from './selectedItemsSlice';
 import type { RootState } from '../../../app/store.ts';
-import type { Season } from '../../../scripts/scripts.ts';
-import useLocalStorage from '../../../hooks/useLocalStorage.ts';
+import type { Season } from '../../scripts/scripts.ts';
+import useLocalStorage from '../../hooks/useLocalStorage.ts';
 
 const DashboardItem = (props: { item: Season }) => {
   const dispatch = useDispatch();

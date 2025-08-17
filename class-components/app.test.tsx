@@ -6,7 +6,7 @@ import {
   waitFor,
 } from '@testing-library/react';
 import SearchPanel from './pages/StarWars/components/SearchPanel.tsx';
-import Page from './pages/StarWars/Page.tsx';
+import Page from './pages/StarWars/page.tsx';
 import { Api } from './api/api.ts';
 import { MemoryRouter } from 'react-router-dom';
 const mockLocalStorage = (() => {

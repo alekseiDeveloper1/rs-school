@@ -1,11 +1,13 @@
+'use client';
 import { useState } from 'react';
 import List from './components/List';
-import { normalizeString, type Season } from '../../scripts/scripts';
+import { normalizeString, type Season } from '../scripts/scripts';
 import SearchPanel from './components/SearchPanel';
-import Header from '../../layout/Page';
 import { Pagination } from './components/Pagination.tsx';
-import { useLocation } from 'react-router-dom';
 import { useGetSeasonsQuery } from '../../api/api.ts';
+import Header from './layout/Page';
+import { useSearchParams } from 'next/navigation';
+import '../../index.css';
 type State = {
   seasons: Season[] | null;
   isLoading: boolean;
@@ -16,9 +18,11 @@ type State = {
 };
 const ITEMS_PER_PAGE = 10;
 export default function Page() {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useSearchParams();
+
+  // Получить конкретный параметр
   const currentPage = Number(searchParams.get('page')) || 1;
+
   const { data, isLoading } = useGetSeasonsQuery({
     countElement: ITEMS_PER_PAGE,
     currentPage: currentPage,
@@ -65,7 +69,7 @@ export default function Page() {
       <Pagination
         totalItems={totalCount}
         itemsPerPage={ITEMS_PER_PAGE}
-        currentPage={currentPage}
+        currentPage={Number(currentPage) || 1}
       />
     </>
   );
